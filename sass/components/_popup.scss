@@ -1,0 +1,110 @@
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba($color-black, .8);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all .3s;
+
+    @supports (-webkit-backdrop-filter: blur(10px)) or (backdrop-filter: (10px)) {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+        background-color: rgba($color-black, .3);
+    }
+
+    &:target {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    &__content {
+        @include absCenter;
+        display: table;
+        background-color: $color-white;
+        width: 75%;
+        border-radius: 4px;
+        box-shadow: 0 2rem 4rem rgba($color-black, .3);
+        transition: all .4s .2s;
+        overflow: hidden;
+        transform: translate(-50%, -50%) scale(.25);
+    }
+
+    &:target &__content {
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &__img {
+        display: block;
+        width: 100%;
+
+        @include response (phone) {
+            display: inline-block;
+            width: 49.7%;
+            vertical-align: top;
+            background-size: contain;
+        }
+    }
+
+    &__left {
+        display: table-cell;
+        width: 33.33333%;
+        // vertical-align: middle;
+
+        @include response (phone) {
+            display: block;
+            width: 100%;
+        }
+
+
+    }
+
+    &__right {
+        display: table-cell;
+        vertical-align: middle;
+        padding: 3rem 5rem;
+        width: 66.66666%;
+
+        @include response (phone) {
+            display: block;
+            width: 100%;
+        }
+    }
+
+    &__text {
+        font: 1.4rem;
+        margin-bottom: 4rem;
+        column-count: 2;
+        column-gap: 4rem;
+        column-rule: 1px solid $color-gray-light-2;
+        hyphens: auto;
+    }
+
+    &__close {
+        &:link,
+        &:visited {
+            display: inline-block;
+            position: absolute;
+            top: 2.5rem;
+            right: 2.5rem;
+            font-size: 5rem;
+            text-decoration: none;
+            color: $color-gray-dark;
+
+            @include response (phone) {
+               top: 0;
+               right: 2rem;
+               z-index: 100;
+               color: $color-primary;
+            }
+
+        }
+     
+        &:hover {
+            color: $color-primary;
+        }
+    }
+}
